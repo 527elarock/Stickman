@@ -1,0 +1,2 @@
+ONce diff btn is clicked _
+    pick word and save it as RndWord

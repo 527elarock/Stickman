@@ -1,63 +1,59 @@
-<!DOCTYPE html>
+<!--ai used-->
+
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Hangman</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hangman</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-</head>
+ 
 
-<body>
-
-<div class="container d-flex justify-content-center align-items-center vh-100">
-
-<div class="game-card text-center p-4">
-
-<h1 class="title mb-4">Hangman</h1>
-
-<h2 id="wordDisplay" class="word-display">_ _ _ _</h2>
-
-<div class="info mt-4">
-
-<p class="lives"> Lives: <span id="lives">0</span></p>
-
-<p class="wrong"> Wrong Letters: <span id="wrongLetters"></span></p>
-
+  <body>
+    <div
+      class="container d-flex justify-content-center align-items-center vh-100"
+    >
+        <div id="difficultyPopup" class="popup-overlay">
+  <div class="popup-box">
+    <h2>Choose a Difficulty</h2>
+    <div class="popup-buttons">
+      <button class="btn btn-success" onclick="selectDifficulty('easy')">Easy</button>
+      <button class="btn btn-warning" onclick="selectDifficulty('medium')">Medium</button>
+      <button class="btn btn-danger" onclick="selectDifficulty('hard')">Hard</button>
+    </div>
+  </div>
 </div>
 
-<input
-type="text"
-id="letterInput"
-maxlength="1"
-class="form-control guess-box mx-auto mt-3"
-placeholder="Enter a letter"
-/>
+      <div class="game-card text-center p-4">
+        <h1 class="title mb-4">Hangman</h1>
 
-<button class="btn btn-primary mt-3 guess-btn" onclick="guessLetter()">Guess</button>
+        <h2 id="wordDisplay" class="word-display">_ _ _ _</h2>
 
-<p id="message" class="message mt-3"></p>
+        <div class="info mt-4">
+          <p class="lives">Lives: <span id="lives">0</span></p>
 
-<hr class="mt-4">
+          <p class="wrong">Wrong Letters: <span id="wrongLetters"></span></p>
+        </div>
 
-<h5 class="mb-3">Choose Difficulty</h5>
+        <input
+          type="text"
+          id="letterInput"
+          maxlength="1"
+          class="form-control guess-box mx-auto mt-3"
+          placeholder="Guess..."
+        />
 
-<div class="difficulty-buttons">
+       
+        </div>
+      </div>
+    </div>
 
-<button class="btn btn-success diff-btn" onclick="startGame('easy')">Easy</button>
-
-<button class="btn btn-warning diff-btn" onclick="startGame('medium')">Medium</button>
-
-<button class="btn btn-danger diff-btn" onclick="startGame('hard')">Hard</button>
-
-</div>
-
-</div>
-
-</div>
-
-<script src="script.js"></script>
-
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
