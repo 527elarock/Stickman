@@ -1,0 +1,58 @@
+body {
+    background: linear-gradient(135deg, #1f2937, #111827);
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.game-card {
+    background: #1f2937;
+    width: 420px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.word-display {
+    letter-spacing: 12px;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.lives {
+    font-size: 20px;
+}
+
+.wrong {
+    font-size: 18px;
+}
+
+.guess-box {
+    width: 120px;
+    text-align: center;
+    font-size: 22px;
+    border-radius: 8px;
+}
+
+.guess-btn {
+    width: 120px;
+}
+
+.message {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.difficulty-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.diff-btn {
+    width: 100px;
+    font-weight: bold;
+}
