@@ -4,6 +4,9 @@ const easyWords = ["flag", "star", "nato", "visa", "nike", "army", "oil"];
 const mediumWords = ["faithful", "liberty", "anthem", "unity", "proud"];
 const hardWords = ["jingoistic", "patriotism", "freedom", "veteran"];
 
+let guessedLetters = [];
+
+
 function selectDifficulty(diff) {
   // Hide the popup
   document.getElementById("difficultyPopup").style.display = "none";
@@ -33,14 +36,25 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function startGame(diff) {
-  guessedLetters = [];
+  guessedLetters = []
 updateWordDisplay()
 
   
 }
 
-function guessedLetters(){
 
+
+
+function submitGuess() {
+  var letter = document.getElementById("letterInput").value.toLowerCase();
+
+  if (letter === "") return;
+
+  guessedLetters.push(letter);
+  updateWordDisplay();
+
+  document.getElementById("letterInput").value = "";
+  document.getElementById("wrongLetters").textContent = guessedLetters.join(", ");
 }
 
 
@@ -72,3 +86,10 @@ function updateWordDisplay() {
 
     document.getElementById("wordDisplay").textContent = display;
   }
+
+  //from the web
+  document
+    .getElementById("letterInput")
+    .addEventListener("keydown", function (e) {
+      if (e.key === "Enter") submitGuess();
+    });
