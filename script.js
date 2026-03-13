@@ -3,8 +3,31 @@ let secretWord = "";
 const easyWords = ["flag", "star", "nato", "visa", "nike", "army", "oil"];
 const mediumWords = ["faithful", "liberty", "anthem", "unity", "proud"];
 const hardWords = ["jingoistic", "patriotism", "freedom", "veteran"];
-
+let lives = 6
 let guessedLetters = [];
+
+
+
+
+// Make sure the popup is visible on page load
+document.addEventListener("DOMContentLoaded", function () {
+  showDifficultyPopup();
+});
+
+
+//from the web
+document
+  .getElementById("letterInput")
+  .addEventListener("keydown", function (e) {
+    if (e.key === "Enter") submitGuess();
+  });
+
+
+
+function showDifficultyPopup() {
+  document.getElementById("difficultyPopup").style.display = "flex";
+}
+
 
 function selectDifficulty(diff) {
   // Hide the popup
@@ -24,79 +47,81 @@ function selectDifficulty(diff) {
   startGame(diff);
 }
 
-// Optionally, show the popup again if you want to restart
-function showDifficultyPopup() {
-  document.getElementById("difficultyPopup").style.display = "flex";
-}
-
-// Make sure the popup is visible on page load
-document.addEventListener("DOMContentLoaded", function () {
-  showDifficultyPopup();
-});
-
 function startGame(diff) {
   guessedLetters = [];
+  lives = 6
   updateWordDisplay();
+  
 }
+
+// Optionally, show the popup again if you want to restart
 
 function submitGuess() {
   var letter = document.getElementById("letterInput").value.toLowerCase();
 
   if (letter === "") return;
-
+  //check to see if letter guessed already
   //update the guessed letter list in HTML
   if (guessedLetters.includes(letter)) {
-    
-    
-    
-    //FIX
-    
-    
-    
-    document.getElementById("message").textContent = "Already Guessed!"
+    //if already guessed:
+    document.getElementById("message").textContent = "Already Guessed!";
   } else {
-    guessedLetters.push(letter);
-    updateWordDisplay();
+    if (secretWord.includes(letter)) {
+        guessedLetters.push(letter);
+       updateWordDisplay();
 
-    document.getElementById("letterInput").value = "";
-    document.getElementById("guessedLetters").textContent =
-      guessedLetters.join(", ");
+        document.getElementById("letterInput").value = "";
+        document.getElementById("guessedLetters").textContent =
+        guessedLetters.join(", ");
+    } else {
+      
+      lives--
+      document.getElementById("lives").textContent = lives;
+      guessedLetters.push(letter);
+      updateWordDisplay();
 
+      document.getElementById("letterInput").value = "";
+      document.getElementById("guessedLetters").textContent =
+        guessedLetters.join(", ");
+
+    }
   }
+
+  
 }
 
 //got from Kilgore's demo
 function updateWordDisplay() {
-  let display = ""; // This variable will hold the string we build for the screen
-
-  // Loop through every letter in the secret word
-  // i starts at 0 because strings use zero-based indexing
-  // The loop will run once for each character in the word
+  let display = "";
   for (let i = 0; i < secretWord.length; i++) {
-    // Get the letter at the current position in the word
-    // charAt(i) returns the character located at index i
     let letter = secretWord.charAt(i);
-
-    // Check if this letter exists in the guessedLetters array
-    // includes() returns true if the letter exists in the array
     if (guessedLetters.includes(letter)) {
-      // If the letter has been guessed,
-      // add the letter to the display string
-      // A space is added so the letters appear spaced out
       display += letter + " ";
     } else {
-      // If the letter has NOT been guessed,
-      // add an underscore instead
       display += "_ ";
     }
   }
 
+  
+  document.getElementById("lives").textContent = lives;
+
   document.getElementById("wordDisplay").textContent = display;
+
+
+  if (lives=0 && !display.includes("_")){
+    document.getElementById("message").textContent = "You Win!";
+  } else (lives < 1 && display.includes("_")) { 
+    document.getElementById("message").textContent = "You Lose!";
+  }
+
+  
+
 }
 
-//from the web
-document
-  .getElementById("letterInput")
-  .addEventListener("keydown", function (e) {
-    if (e.key === "Enter") submitGuess();
-  });
+function restartGame() {
+  showDifficultyPopup()
+  startGame()
+}
+
+
+
