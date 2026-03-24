@@ -21,7 +21,7 @@ body {
     background: rgba(10, 20, 50, 0.82);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    width: 560px;
+    width: 720px;
     border-radius: 6px;
     box-shadow:
         0 0 0 3px #B22234,
@@ -268,3 +268,4 @@ body {
     color: #fff;
     box-shadow: 0 4px 12px rgba(178, 34, 52, 0.4);
 }
+

@@ -27,7 +27,7 @@ const mediumWords = [
   "senator",
 ];
 const hardWords = [
-  "jingoistic",
+ 
   "patriotism",
   "freedom",
   "veteran",
@@ -36,15 +36,14 @@ const hardWords = [
   "citizenship",
   "sovereignty",
 ];
+
 let lives = 6;
 let guessedLetters = [];
 
-// Make sure the popup is visible on page load
 document.addEventListener("DOMContentLoaded", function () {
   showDifficultyPopup();
 });
 
-//from the web
 document
   .getElementById("letterInput")
   .addEventListener("keydown", function (e) {
@@ -56,9 +55,7 @@ function showDifficultyPopup() {
 }
 
 function selectDifficulty(diff) {
-  // Hide the popup
   document.getElementById("difficultyPopup").style.display = "none";
-
   if (diff === "easy") {
     secretWord = easyWords[Math.floor(Math.random() * easyWords.length)];
   } else if (diff === "medium") {
@@ -66,10 +63,6 @@ function selectDifficulty(diff) {
   } else if (diff === "hard") {
     secretWord = hardWords[Math.floor(Math.random() * hardWords.length)];
   }
-
-  console.log(secretWord);
-
-  // Start the game with the selected difficulty
   startGame(diff);
 }
 
@@ -78,18 +71,14 @@ function startGame(diff) {
   lives = 6;
   document.getElementById("guessedLetters").textContent = "";
   document.getElementById("message").textContent = "";
-  updateHealthBar(); // reset bar to full
+  updateHealthBar();
   updateWordDisplay();
 }
 
 function submitGuess() {
   var letter = document.getElementById("letterInput").value.toLowerCase();
-
   if (letter === "") return;
-  //check to see if letter guessed already
-  //update the guessed letter list in HTML
   if (guessedLetters.includes(letter)) {
-    //if already guessed:
     document.getElementById("message").textContent = "Already Guessed!";
   } else {
     if (secretWord.includes(letter)) {
@@ -110,23 +99,16 @@ function submitGuess() {
   }
 }
 
-//got from Kilgore's demo
 function updateWordDisplay() {
   let display = "";
-
+  //loop
   for (let i = 0; i < secretWord.length; i++) {
-    let letter = secretWord.charAt(i);
-    if (guessedLetters.includes(letter)) {
-      display += letter + " ";
-    } else {
-      display += "_ ";
-    }
-  }
-
+    let letter = secretWord.charAt(i); //get the letter
+    display += guessedLetters.includes(letter) ? letter + " " : "_ "; //check if guessed
+  } 
   document.getElementById("lives").textContent = lives;
   document.getElementById("wordDisplay").textContent = display;
-  updateHealthBar(); // update bar on every display refresh
-
+  updateHealthBar();
   if (!display.includes("_")) {
     document.getElementById("message").textContent = "You Win!";
   } else if (lives <= 0) {
@@ -140,12 +122,11 @@ function restartGame() {
   startGame();
 }
 
-//from web
 function updateHealthBar() {
-  let healthPercent = (lives / 6) * 100;
-  document.getElementById("healthBar").style.width = healthPercent + "%";
-
-  // Keep red/white/blue at all health levels, just shift intensity
+  let healthPercent = (lives / 6) * 100; //calculate percentage
+  document.getElementById("healthBar").style.width = healthPercent + "%"; //updates width
+  
+  //changes color accordingly
   if (healthPercent > 60) {
     document.getElementById("healthBar").style.background =
       "linear-gradient(90deg, #B22234, #f5f5f5, #3C3B6E)";
@@ -157,3 +138,4 @@ function updateHealthBar() {
       "linear-gradient(90deg, #ff0000, #ffcccc, #000033)";
   }
 }
+
